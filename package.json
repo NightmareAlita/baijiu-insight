@@ -1,0 +1,116 @@
+{
+  "name": "baijiu-insight",
+  "productName": "白酒品牌洞察",
+  "version": "1.0.1",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "vite",
+    "server": "node --import tsx --watch server/index.ts",
+    "build": "tsc -b && vite build",
+    "build:server": "node scripts/build-server.mjs",
+    "build:web": "npm run build",
+    "build:all": "npm run build:server && npm run build:web",
+    "electron:dev": "npm run build:all && electron .",
+    "dist:win": "npm run build:all && electron-builder --win nsis --x64 --publish never",
+    "dist:mac": "npm run build:all && electron-builder --mac dmg --publish never",
+    "dist": "npm run build:all && electron-builder --publish never",
+    "lint": "oxlint --deny-warnings src server electron scripts tests",
+    "preview": "vite preview",
+    "start": "node server-build/index.js",
+    "test": "node --import tsx --test \"tests/*.test.ts\"",
+    "dist:win:arm64": "npm run build:all && electron-builder --win nsis --arm64 --publish never",
+    "dist:mac:universal": "npm run build:all && electron-builder --mac dmg --universal --publish never",
+    "smoke:desktop": "node scripts/smoke-desktop.mjs"
+  },
+  "dependencies": {
+    "axios": "^1.20.0",
+    "cheerio": "^1.2.0",
+    "cors": "^2.8.6",
+    "echarts": "^5.6.0",
+    "echarts-for-react": "^3.0.6",
+    "echarts-wordcloud": "^2.1.0",
+    "express": "^5.2.1",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.7",
+    "@vitejs/plugin-react": "^6.1.1",
+    "electron": "^44.5.1",
+    "electron-builder": "^26.15.3",
+    "oxlint": "^1.81.0",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "~6.0.2",
+    "vite": "^8.3.0"
+  },
+  "build": {
+    "appId": "com.baijiu.insight",
+    "productName": "白酒品牌洞察",
+    "asar": true,
+    "files": [
+      "electron/**/*",
+      "server-build/**/*",
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraMetadata": {
+      "main": "electron/main.js"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "白酒品牌洞察",
+      "perMachine": false,
+      "runAfterFinish": true,
+      "deleteAppDataOnUninstall": false,
+      "installerLanguages": [
+        "zh_CN",
+        "en_US"
+      ],
+      "displayLanguageSelector": false
+    },
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64",
+            "x64"
+          ]
+        }
+      ],
+      "category": "public.app-category.business",
+      "minimumSystemVersion": "13.0"
+    },
+    "directories": {
+      "output": "release"
+    },
+    "artifactName": "Baijiu-Insight-${version}-${os}-${arch}.${ext}",
+    "executableName": "BaijiuInsight"
+  },
+  "description": "白酒品牌公开内容与样本口碑分析桌面应用",
+  "license": "UNLICENSED",
+  "engines": {
+    "node": ">=22.12.0"
+  }
+}

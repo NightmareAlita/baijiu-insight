@@ -1,0 +1,116 @@
+@import "tailwindcss";
+
+@theme {
+  --color-baijiu-50: #fbf7f2;
+  --color-baijiu-100: #f5ece0;
+  --color-baijiu-200: #ead5b8;
+  --color-baijiu-300: #dcb785;
+  --color-baijiu-400: #cd9752;
+  --color-baijiu-500: #c07f34;
+  --color-baijiu-600: #a96629;
+  --color-baijiu-700: #8c4e24;
+  --color-baijiu-800: #734024;
+  --color-baijiu-900: #5f3620;
+  --color-baijiu-950: #341b0e;
+
+  --color-gold-400: #e6b94d;
+  --color-gold-500: #d4a017;
+  --color-gold-600: #b8860b;
+
+  --color-ink-900: #1a1410;
+  --color-ink-800: #2a2018;
+  --color-ink-700: #3d2f22;
+  --color-ink-600: #5c4a38;
+  --color-ink-500: #7a6650;
+  --color-ink-400: #9d8a72;
+  --color-ink-300: #c4b49c;
+  --color-ink-200: #e3d8c6;
+  --color-ink-100: #f3ece0;
+  --color-ink-50: #faf6ef;
+}
+
+body {
+  margin: 0;
+  font-family: "PingFang SC", "Microsoft YaHei", "Helvetica Neue", Arial, sans-serif;
+  background-color: #faf6ef;
+  color: #2a2018;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+button, a, summary {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:not(:disabled), summary {
+  cursor: pointer;
+}
+
+button:focus-visible, a:focus-visible, summary:focus-visible {
+  outline: 2px solid #a96629;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 自定义滚动条 */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #f3ece0;
+}
+::-webkit-scrollbar-thumb {
+  background: #c4b49c;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #9d8a72;
+}
+
+/* 渐变标题 */
+.title-gradient {
+  background: linear-gradient(135deg, #8c4e24 0%, #d4a017 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* 卡片悬浮效果 */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -8px rgba(60, 40, 20, 0.18);
+}
+
+/* 加载动画 */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, #f3ece0 25%, #e3d8c6 50%, #f3ece0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* 淡入动画 */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.fade-in-up {
+  animation: fadeInUp 0.5s ease forwards;
+}
